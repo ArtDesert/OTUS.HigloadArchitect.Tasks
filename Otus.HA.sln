@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionIt
 		docker-compose.yaml = docker-compose.yaml
 		.dockerignore = .dockerignore
 		Dockerfile = Dockerfile
+		OTUS Highload Architect Environment.postman_environment.json = OTUS Highload Architect Environment.postman_environment.json
+		OTUS Higload Architect API.postman_collection.json = OTUS Higload Architect API.postman_collection.json
 	EndProjectSection
 EndProject
 Global

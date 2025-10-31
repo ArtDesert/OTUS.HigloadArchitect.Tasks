@@ -1,0 +1,421 @@
+{
+	"info": {
+		"_postman_id": "bc5d0ba7-9202-4d6a-9890-66b70aac209e",
+		"name": "OTUS Higload Architect API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31136087"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {\r",
+									"    pm.environment.set(\"user_id\", pm.response.text());\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"firstName\": \"Василий\",\r\n  \"lastName\": \"Пупкин\",\r\n  \"birthDate\": \"2000-03-04\",\r\n  \"sex\": 1,\r\n  \"biography\": \"Старший архитектор баз данных\",\r\n  \"city\": \"New York\",\r\n  \"password\": \"strong-password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/user/register",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Василий\",\r\n  \"lastName\": \"Пупкин\",\r\n  \"birthDate\": \"2000-03-04\",\r\n  \"sex\": 1,\r\n  \"biography\": \"Старший архитектор баз данных\",\r\n  \"city\": \"New York\",\r\n  \"password\": \"strong-password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/user/register",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"user",
+										"register"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "d8a10051-16c9-4538-8bd6-8215c1d9b2b8"
+						},
+						{
+							"name": "400 BadRequest",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"firstName\": \"Василий\",\r\n  \"lastName\": \"Пупкин\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/user/register",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"user",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"type\": \"https://tools.ietf.org/html/rfc9110#section-15.5.1\",\n    \"title\": \"One or more validation errors occurred.\",\n    \"status\": 400,\n    \"errors\": {\n        \"City\": [\n            \"The City field is required.\"\n        ],\n        \"Password\": [\n            \"The Password field is required.\"\n        ],\n        \"Biography\": [\n            \"The Biography field is required.\"\n        ]\n    },\n    \"traceId\": \"00-2c55bd71b3b08ea9b69be03f8738d751-b20abba235bd169f-00\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {\r",
+									"    pm.environment.set(\"access_token\", pm.response.text());\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{user_id}}\",\r\n  \"password\": \"strong-password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"d8a10051-16c9-4538-8bd6-8215c1d9b2b8\", //ID пользователя, автоматически подтянется из прошлого запроса Register.\r\n  \"password\": \"strong-password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/login",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ4YTEwMDUxLTE2YzktNDUzOC04YmQ2LTgyMTVjMWQ5YjJiOCIsImp0aSI6IjkyYjZmYzQyLWFiZjYtNDA4ZC05M2FiLTZhNWE1MzJmZDEzOSIsImV4cCI6MTc2MTk0MTc4Nn0.zBQeRRsWhzQKTwYbORQXcBCPlJK2shjl1PjU5UPOC-I"
+						},
+						{
+							"name": "400 BadRequest",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"123\", //Не GUID.\r\n  \"password\": \"strong-password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/login",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "Некорректный ID пользователя"
+						},
+						{
+							"name": "500 IncorrectPassword",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": \"d8a10051-16c9-4538-8bd6-8215c1d9b2b8\",\r\n  \"password\": \"strong-password-incorrect\" //Неверный пароль\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/users/login",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "Неверный логин или пароль"
+						}
+					]
+				},
+				{
+					"name": "GetUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/users/user/get/{{user_id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"user",
+								"get",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/users/user/get/{{user_id}}",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"user",
+										"get",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"firstName\": \"Василий\",\r\n    \"lastName\": \"Пупкин\",\r\n    \"birthDate\": \"2000-03-04\",\r\n    \"sex\": 1,\r\n    \"biography\": \"Старший архитектор баз данных\",\r\n    \"city\": \"New York\"\r\n}"
+						},
+						{
+							"name": "400 BadRequest",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/users/user/get/123",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"user",
+										"get",
+										"123"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "Некорректный ID пользователя"
+						},
+						{
+							"name": "401 Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base-url}}/users/user/get/{{user_id}}",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"users",
+										"user",
+										"get",
+										"{{user_id}}"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
