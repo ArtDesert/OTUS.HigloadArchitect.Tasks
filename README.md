@@ -6,12 +6,13 @@
 - **Infrastructure**: Docker-Compose
 
 ### 2. Запуск приложения
+Из корня репозитория выполнить команду для сборки образов и запуска всех контейнеров в фоновом режиме:
 ```bash
 docker-compose up --build -d
 ```
 
 ### 3. Postman окружение
-Postman коллекцию и переменные окружения можно найти в корне репозитория:
+Postman коллекцию и переменные окружения можно найти в следующих файлах в корне репозитория:
 ```
 OTUS Highload Architect Environment.postman_environment.json
 OTUS Higload Architect API.postman_collection.json
