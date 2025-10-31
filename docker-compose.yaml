@@ -1,0 +1,62 @@
+networks:
+  otus-ha-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+
+services:
+  otus-ha-host:
+    container_name: otus-ha-host
+    build:
+      dockerfile: Dockerfile
+    image: otus-ha-app:1.0
+    ports:
+      - "5277:80"
+    networks:
+      - otus-ha-network
+    volumes:
+      - ./Otus.HA.Host/appsettings.json:/app/appsettings.json
+    environment:
+      ASPNETCORE_URLS: http://0.0.0.0:80
+      ASPNETCORE_ENVIRONMENT: Development
+    depends_on:
+      otus-ha-db:
+        condition: service_healthy
+      otus-ha-db-migration:
+        condition: service_completed_successfully
+
+  otus-ha-db:
+    image: postgres:15
+    restart: unless-stopped
+    container_name: otus-ha-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "otus-ha-db"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      PGUSER: "postgres"
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 5s
+      timeout: 10s
+      retries: 120
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - otus-ha-network
+
+  otus-ha-db-migration:
+    build:
+      context: ./Otus.HA.Database.Migrations
+      dockerfile: Dockerfile
+    image: otus-ha-db-migration:1.0
+    container_name: otus-ha-db-migration
+    depends_on:
+      otus-ha-db:
+        condition: service_healthy
+    environment:
+      ConnectionStrings__otus-ha-service-db-connection: User ID=postgres;Password=postgres;Host=otus-ha-db;Port=5432;Database=otus-ha-db;
+    networks:
+      - otus-ha-network

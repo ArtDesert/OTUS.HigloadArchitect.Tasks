@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.HA.Host", "Otus.HA.Host\Otus.HA.Host.csproj", "{26BF8C63-6D90-45A1-AA6B-1ED2682B5515}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.HA.AppServices", "Otus.HA.AppServices\Otus.HA.AppServices.csproj", "{5CE881F4-AF07-488F-905D-6062BA855962}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Otus.HA.Database.Migrations", "Otus.HA.Database.Migrations\Otus.HA.Database.Migrations.csproj", "{ADB452A6-358C-452C-B6C8-03B697809B62}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{A67FA489-DF47-4FDA-90EE-578C52D00D37}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yaml = docker-compose.yaml
+		.dockerignore = .dockerignore
+		Dockerfile = Dockerfile
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26BF8C63-6D90-45A1-AA6B-1ED2682B5515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26BF8C63-6D90-45A1-AA6B-1ED2682B5515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26BF8C63-6D90-45A1-AA6B-1ED2682B5515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26BF8C63-6D90-45A1-AA6B-1ED2682B5515}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CE881F4-AF07-488F-905D-6062BA855962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CE881F4-AF07-488F-905D-6062BA855962}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CE881F4-AF07-488F-905D-6062BA855962}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CE881F4-AF07-488F-905D-6062BA855962}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB452A6-358C-452C-B6C8-03B697809B62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB452A6-358C-452C-B6C8-03B697809B62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB452A6-358C-452C-B6C8-03B697809B62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB452A6-358C-452C-B6C8-03B697809B62}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "LocalRun": {
+      "commandName": "Project",
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5277",
+      "dotnetRunMessages": true
+    }
+  }
+}
